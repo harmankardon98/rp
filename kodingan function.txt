@@ -1,0 +1,46 @@
+<?PHP
+require_once('db.data.php');
+
+if(isset($_REQUEST['act'])){
+	$act=$_REQUEST['act'];
+
+	if ($act == "login-user") {
+
+		echo "<script>alert('Selamat Datang');</script>";
+		
+		 $username = $db->escape_string($_POST['email']);
+		 $password = $db->escape_string(md5($_POST['password']));
+
+		 $getdata = $db->wheres("user", "id_user,email,password,role", "email='$username'");
+
+		 if ($getdata) {
+		 	$user = $getdata['email'];
+		 	$pass = $getdata['password'];
+		 	$id   = $getdata['id_user'];
+
+		 	if ( $username !== $email && $password !== $pass) {
+		 		echo "<script>alert('Mohon Chek Username atau Password Anda');</script>";
+		 	}else if( $username == $email && $password != $pass){
+		 		echo "<script>alert('password salah');</script>";
+		 	}else if ($username != $email && $password == $pass) {
+		 		echo "<script>alert('Username salah');</script>";
+		 	}else{
+		 		echo "<script>alert('Anda Berhasil Login');</script>";
+		 		$getdataz = $db->wheres("admin", "email", "email='$email'");
+				
+		 		$_SESSION['admin'] = $admin;
+		 		$_SESSION['email'] = $getdataz['email'];
+		 		$_SESSION['role'] = $getdata['role'];
+		 	}
+		 }else{
+		 	echo "<script>alert('Username salah');</script>";
+		 }
+
+	}
+	if ($act == "logout") {
+		session_destroy();
+		$message = "Anda Berhasil Keluar dari Web Kami !!";
+		echo $message;
+	}
+}
+?>

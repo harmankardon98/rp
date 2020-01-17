@@ -1,0 +1,21 @@
+
+
+
+user
+- id user
+- nama user
+- username
+- password varchar 15
+- role enum("admin","teacher","student")
+teacher
+- id_teacher
+- nama_teacher
+- email
+- alm_teacher
+- no_tlp
+student
+- id_student
+- nama_student
+- email
+- alm_student
+- no_tlp

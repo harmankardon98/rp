@@ -1,0 +1,4 @@
+ALTER TABLE NAMA_TABLE AUTO_INCREMENT=0
+
+ini untuk mereset semua data(hilang dan reset ke awal)
+truncate table announcement
